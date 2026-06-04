@@ -1,0 +1,243 @@
+:root {
+    --primary: #0052cc;
+    --secondary: #00b37e;
+    --text-dark: #333333;
+    --bg-light: #f4f6f9;
+    --border-color: #e1e4e8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    max-width: 950px;
+    width: 100%;
+    overflow: hidden;
+    min-height: 550px;
+}
+
+/* Lado do Marketing */
+.marketing-side {
+    background: linear-gradient(135deg, #003399 0%, var(--primary) 100%);
+    color: #ffffff;
+    padding: 40px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.marketing-side h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.marketing-side p {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.marketing-side ul {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.marketing-side li {
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.badge {
+    background: var(--secondary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Lado do Formulário */
+.form-side {
+    padding: 40px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.progress-bar {
+    background: var(--border-color);
+    height: 6px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.progress {
+    background: var(--secondary);
+    height: 100%;
+    width: 33.3%;
+    transition: width 0.4s ease;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+h3 {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.step-desc {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus, .input-group select:focus {
+    border-color: var(--primary);
+}
+
+/* Botões */
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+button {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-next, .btn-submit {
+    background: var(--primary);
+    color: white;
+    width: 100%;
+}
+
+.btn-submit {
+    background: var(--secondary);
+}
+
+.btn-next:hover, .btn-submit:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.btn-prev {
+    background: transparent;
+    color: #666;
+    border: 2px solid var(--border-color);
+}
+
+.btn-prev:hover {
+    background: var(--border-color);
+}
+
+/* Tela de Sucesso */
+.hidden {
+    display: none !important;
+}
+
+.success-container {
+    text-align: center;
+    animation: scaleUp 0.4s ease;
+}
+
+.success-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+.highlight-text {
+    color: var(--secondary);
+    font-size: 1.1rem;
+    margin: 15px 0;
+}
+
+/* Animações e Responsividade */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleUp {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .marketing-side, .form-side {
+        width: 100%;
+        padding: 30px 20px;
+    }
+    .marketing-side {
+        text-align: center;
+    }
+    .badge {
+        align-self: center;
+    }
+}

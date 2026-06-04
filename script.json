@@ -1,0 +1,61 @@
+// Controle de Etapas do Formulário
+function nextStep(step) {
+    // Validação simples antes de avançar
+    if (step === 2) {
+        const carBrand = document.getElementById('carBrand').value;
+        if (!carBrand.trim()) {
+            alert('Por favor, informe a marca e o modelo do seu veículo.');
+            return;
+        }
+    }
+    
+    if (step === 3) {
+        // A segunda etapa é opcional ou já validada nativamente pelo select
+    }
+
+    // Oculta todas as etapas
+    document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+    
+    // Mostra a etapa atual
+    document.getElementById(`step-${step}`).classList.add('active');
+    
+    // Atualiza a barra de progresso
+    const progressPercent = ((step) / 3) * 100;
+    document.getElementById('progress').style.width = `${progressPercent}%`;
+}
+
+function prevStep(step) {
+    document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+    document.getElementById(`step-${step}`).classList.add('active');
+    
+    const progressPercent = ((step) / 3) * 100;
+    document.getElementById('progress').style.width = `${progressPercent}%`;
+}
+
+// Manipulação do Envio do Formulário (Captação do Lead)
+document.getElementById('insuranceForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Impede a página de recarregar
+
+    // Coleta dos dados digitados
+    const leadData = {
+        carro: document.getElementById('carBrand').value,
+        placa: document.getElementById('carPlate').value,
+        seguradoraAtual: document.getElementById('currentInsurer').value,
+        precoAtual: document.getElementById('currentPrice').value,
+        nome: document.getElementById('clientName').value,
+        telefone: document.getElementById('clientPhone').value,
+        email: document.getElementById('clientEmail').value
+    };
+
+    // Aqui você integraria com a API da sua corretora ou CRM (ex: RD Station, HubSpot, ou envio por e-mail)
+    console.log("Novo lead de concorrência capturado com sucesso:", leadData);
+
+    // Exibe os dados de sucesso personalizados na tela para gerar impacto
+    document.getElementById('successName').innerText = leadData.nome.split(' ')[0]; // Apenas primeiro nome
+    document.getElementById('successCar').innerText = leadData.carro;
+    
+    // Esconde o formulário e a barra de progresso, exibe o sucesso
+    document.getElementById('insuranceForm').classList.add('hidden');
+    document.querySelector('.progress-bar').classList.add('hidden');
+    document.getElementById('successMessage').classList.remove('hidden');
+});
