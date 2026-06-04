@@ -8,27 +8,24 @@ function nextStep(step) {
             return;
         }
     }
-    
-    if (step === 3) {
-        // A segunda etapa é opcional ou já validada nativamente pelo select
-    }
 
     // Oculta todas as etapas
     document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-    
+
     // Mostra a etapa atual
     document.getElementById(`step-${step}`).classList.add('active');
-    
-    // Atualiza a barra de progresso
-    const progressPercent = ((step) / 3) * 100;
+
+    // Atualiza a barra de progresso (começa do zero no passo 1)
+    const progressPercent = ((step - 1) / 3) * 100;
     document.getElementById('progress').style.width = `${progressPercent}%`;
 }
 
 function prevStep(step) {
     document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
     document.getElementById(`step-${step}`).classList.add('active');
-    
-    const progressPercent = ((step) / 3) * 100;
+
+    // Atualiza a barra de progresso (começa do zero no passo 1)
+    const progressPercent = ((step - 1) / 3) * 100;
     document.getElementById('progress').style.width = `${progressPercent}%`;
 }
 
@@ -36,14 +33,23 @@ function prevStep(step) {
 document.getElementById('insuranceForm').addEventListener('submit', function(e) {
     e.preventDefault(); // Impede a página de recarregar
 
+    // Validação dos dados do cliente (etapa 3)
+    const clientName = document.getElementById('clientName').value;
+    const clientPhone = document.getElementById('clientPhone').value;
+
+    if (!clientName.trim() || !clientPhone.trim()) {
+        alert('Por favor, preencha nome e telefone.');
+        return;
+    }
+
     // Coleta dos dados digitados
     const leadData = {
         carro: document.getElementById('carBrand').value,
         placa: document.getElementById('carPlate').value,
         seguradoraAtual: document.getElementById('currentInsurer').value,
         precoAtual: document.getElementById('currentPrice').value,
-        nome: document.getElementById('clientName').value,
-        telefone: document.getElementById('clientPhone').value,
+        nome: clientName,
+        telefone: clientPhone,
         email: document.getElementById('clientEmail').value
     };
 
@@ -51,9 +57,9 @@ document.getElementById('insuranceForm').addEventListener('submit', function(e) 
     console.log("Novo lead de concorrência capturado com sucesso:", leadData);
 
     // Exibe os dados de sucesso personalizados na tela para gerar impacto
-    document.getElementById('successName').innerText = leadData.nome.split(' ')[0]; // Apenas primeiro nome
-    document.getElementById('successCar').innerText = leadData.carro;
-    
+    document.getElementById('successName').textContent = leadData.nome.split(' ')[0]; // Apenas primeiro nome
+    document.getElementById('successCar').textContent = leadData.carro;
+
     // Esconde o formulário e a barra de progresso, exibe o sucesso
     document.getElementById('insuranceForm').classList.add('hidden');
     document.querySelector('.progress-bar').classList.add('hidden');
