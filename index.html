@@ -1,13 +1,113 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simulador de Seguro Auto | Troque e Economize</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Aula Git</h1>
-    <p>Aula Git co Github</p>
-    
+
+    <div class="container">
+        <div class="marketing-side">
+            <h2>Insatisfeito com seu seguro atual?</h2>
+            <p>Traga sua apólice para a nossa corretora e garantimos até <strong>30% de desconto</strong> ou cobrimos a oferta da concorrência!</p>
+            <ul>
+                <li>✓ Atendimento humano 24h</li>
+                <li>✓ Desconto extra por sinistro zero</li>
+                <li>✓ Ativação digital imediata</li>
+            </ul>
+            <div class="badge">Garantia de Menor Preço</div>
+        </div>
+
+        <div class="form-side">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+
+            <form id="insuranceForm">
+                
+                <div class="form-step active" id="step-1">
+                    <h3>Sobre o seu veículo</h3>
+                    <p class="step-desc">Insira os dados básicos para começarmos.</p>
+                    
+                    <div class="input-group">
+                        <label for="carBrand">Marca e Modelo</label>
+                        <input type="text" id="carBrand" placeholder="Ex: Corolla XEI 2023" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="carPlate">Placa (Opcional - Agiliza a cotação)</label>
+                        <input type="text" id="carPlate" placeholder="ABC1D23">
+                    </div>
+
+                    <button type="button" class="btn-next" onclick="nextStep(2)">Avançar →</button>
+                </div>
+
+                <div class="form-step" id="step-2">
+                    <h3>Sua situação atual</h3>
+                    <p class="step-desc">Queremos cobrir o preço do seu concorrente!</p>
+                    
+                    <div class="input-group">
+                        <label for="currentInsurer">Seguradora Atual</label>
+                        <select id="currentInsurer">
+                            <option value="">Selecione...</option>
+                            <option value="porto">Porto Seguro</option>
+                            <option value="sulamerica">SulAmérica</option>
+                            <option value="bradesco">Bradesco Seguros</option>
+                            <option value="allianz">Allianz</option>
+                            <option value="outra">Outra / Não tenho seguro</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="currentPrice">Quanto você paga aproximadamente por ano? (R$)</label>
+                        <input type="number" id="currentPrice" placeholder="Ex: 2500">
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn-prev" onclick="prevStep(1)">← Voltar</button>
+                        <button type="button" class="btn-next" onclick="nextStep(3)">Ver Desconto →</button>
+                    </div>
+                </div>
+
+                <div class="form-step" id="step-3">
+                    <h3>Para onde enviamos sua proposta?</h3>
+                    <p class="step-desc">Último passo! Nossos consultores vão recalcular sua apólice agora.</p>
+                    
+                    <div class="input-group">
+                        <label for="clientName">Nome Completo</label>
+                        <input type="text" id="clientName" placeholder="Seu nome" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="clientPhone">WhatsApp</label>
+                        <input type="tel" id="clientPhone" placeholder="(11) 99999-9999" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="clientEmail">E-mail</label>
+                        <input type="email" id="clientEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn-prev" onclick="prevStep(2)">← Voltar</button>
+                        <button type="submit" class="btn-submit">Solicitar Cotação com Desconto! 🚀</button>
+                    </div>
+                </div>
+
+            </form>
+
+            <div id="successMessage" class="success-container hidden">
+                <div class="success-icon">🎉</div>
+                <h3>Quase pronto, <span id="successName"></span>!</h3>
+                <p>Analisamos os dados do seu <strong><span id="successCar"></span></strong>.</p>
+                <p class="highlight-text">Identificamos uma oportunidade de até <strong>25% de economia</strong> em relação à sua seguradora atual!</p>
+                <p>Um de nossos corretores já foi acionado e entrará em contato pelo WhatsApp cadastrado em instantes.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
